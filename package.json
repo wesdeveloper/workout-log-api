@@ -14,14 +14,13 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint",
-      "npm run test",
-      "npm run test:functional"
+      "eslint"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test && npm run test:functional"
     }
   },
   "repository": {
