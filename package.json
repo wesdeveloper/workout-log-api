@@ -8,13 +8,15 @@
     "start": "npm run build && node dist/bin/index.js",
     "start:dev": "ts-node-dev bin/index.ts",
     "test": "jest",
-    "test": "jest --projects ./test --runInBand",
+    "test:functional": "jest --projects ./test --runInBand",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
   "lint-staged": {
     "*.js": [
-      "eslint"
+      "eslint",
+      "npm run test",
+      "npm run test:functional"
     ]
   },
   "husky": {
