@@ -7,7 +7,7 @@
     "build": "rimraf dist && tsc",
     "start": "npm run build && node dist/bin/index.js",
     "start:dev": "ts-node-dev bin/index.ts",
-    "test": "jest",
+    "test": "jest --watchAll",
     "test:functional": "jest --projects ./test --runInBand",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
@@ -19,8 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test && npm run test:functional"
+      "pre-commit": "lint-staged"
     }
   },
   "repository": {
