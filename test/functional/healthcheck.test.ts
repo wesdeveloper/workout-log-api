@@ -1,5 +1,3 @@
-import app from '../../src';
-
 describe('Healthcheck functional tests', () => {
   it('Should make a request and receive a statusCode 200', async () => {
     const response = await global.testRequest.get('/healthcheck');
