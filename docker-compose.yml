@@ -1,0 +1,9 @@
+version: "3"
+services:
+  workoutlogapi:
+    build: .
+    ports:
+      - 4001:3000
+    volumes:
+      - .:/app
+    command: bash -c "npm install && npm run start:dev"
