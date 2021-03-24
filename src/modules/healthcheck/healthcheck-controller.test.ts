@@ -8,7 +8,7 @@ describe('Healthcheck controller', () => {
     const result = await healthcheckController.isHealthcheck(httpRequest);
 
     const expectedResult = {
-      status: 200,
+      statusCode: 200,
       body: { message: 'Ok' },
     };
     expect(result).toEqual(expectedResult);
