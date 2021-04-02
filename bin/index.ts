@@ -8,7 +8,6 @@ import { logger } from '../src/config';
 
     // start the express server
     app.listen(port, () => {
-      // tslint:disable-next-line:no-console
       logger.info(`server started at http://localhost:${port}`);
     });
   } catch (err) {
