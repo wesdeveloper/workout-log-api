@@ -1,3 +1,9 @@
-import logger from 'logger';
+import winston from 'winston';
 
-export default logger.createLogger();
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console(),
+  ],
+});
+
+export default logger;
