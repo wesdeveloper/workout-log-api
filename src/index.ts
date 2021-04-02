@@ -1,12 +1,21 @@
+import assert from 'assert';
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import healthcheckRoutes from './modules/healthcheck/healthcheck-routes';
+import { database, logger } from './config';
 
 class App {
-  private app;
+  private app = express();
 
-  constructor() {
-    this.app = express();
+  private async checkDatabaseConnection(): Promise<void> {
+    const connection = database.getConnection();
+
+    try {
+      const [[{ result }]] = await connection.raw('SELECT 1+1 AS result');
+      assert.strictEqual(result, 2);
+    } catch (err) {
+      throw new Error('database connection problem...');
+    }
   }
 
   private setupExpress(): void {
@@ -18,10 +27,18 @@ class App {
   }
 
   async init(): Promise<Application> {
-    console.info('Starging appliction...');
+    logger.info('init application started!');
     this.setupExpress();
 
-    return this.app;
+    try {
+      await this.checkDatabaseConnection();
+
+      logger.info('init application finished!');
+      return this.app;
+    } catch (err) {
+      logger.error(err);
+      throw err;
+    }
   }
 }
 
