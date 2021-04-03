@@ -7,12 +7,15 @@
     "build": "rimraf dist && tsc",
     "start": "npm run build && node dist/bin/index.js",
     "start:dev": "ts-node-dev bin/index.ts",
-    "test": "npm run test:unit && npm run test:functional",
+    "test": "npm run test:unit && npm run docker:test",
     "test:unit": "jest",
     "test:functional": "jest --projects ./test --runInBand",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docker:dev": "docker-compose up -d",
+    "docker:dev:logs": "docker-compose logs -f workoutlogapi",
+    "docker:test": "docker-compose -f docker-compose.test.yml up --abort-on-container-exit"
   },
   "lint-staged": {
     "*.ts": [
@@ -31,13 +34,15 @@
   },
   "homepage": "https://github.com/wesdeveloper/workout-log-api#readme",
   "devDependencies": {
-    "@types/body-parser": "^1.19.0",
     "@types/chance": "^1.1.1",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.20",
+    "@types/knex": "^0.16.1",
     "@types/morgan": "^1.9.2",
+    "@types/mysql": "^2.15.18",
     "@types/node": "^14.14.32",
     "@types/supertest": "^2.0.10",
+    "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "chance": "^1.1.7",
@@ -54,8 +59,11 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "morgan": "^1.10.0"
+    "knex": "^0.95.4",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "winston": "^3.3.3"
   }
 }

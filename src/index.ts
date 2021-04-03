@@ -1,13 +1,10 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import healthcheckRoutes from './modules/healthcheck/healthcheck-routes';
+import { database, logger } from './config';
 
 class App {
-  private app;
-
-  constructor() {
-    this.app = express();
-  }
+  private app = express();
 
   private setupExpress(): void {
     this.app.use(morgan('dev'));
@@ -18,10 +15,18 @@ class App {
   }
 
   async init(): Promise<Application> {
-    console.info('Starging appliction...');
+    logger.info('init application started!');
     this.setupExpress();
 
-    return this.app;
+    try {
+      await database.checkConnection();
+
+      logger.info('init application finished!');
+      return this.app;
+    } catch (err) {
+      logger.error(err);
+      throw err;
+    }
   }
 }
 

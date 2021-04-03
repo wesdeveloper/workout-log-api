@@ -6,4 +6,15 @@ services:
       - 4001:3000
     volumes:
       - .:/app
-    command: bash -c "npm install && npm run start:dev"
+    command: sh -c "/wait && npm install && npm run start:dev"
+    environment:
+      WAIT_HOSTS: db-dev:3306
+    depends_on:
+      - db-dev
+  db-dev:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: workoutadmin
+      MYSQL_PASSWORD: workout123
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: workout
