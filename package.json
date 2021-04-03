@@ -7,7 +7,7 @@
     "build": "rimraf dist && tsc",
     "start": "npm run build && node dist/bin/index.js",
     "start:dev": "ts-node-dev bin/index.ts",
-    "test": "npm run test:unit && npm run test:functional",
+    "test": "npm run test:unit && npm run docker:test",
     "test:unit": "jest",
     "test:functional": "jest --projects ./test --runInBand",
     "lint": "eslint --ext .ts .",
