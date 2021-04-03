@@ -15,7 +15,10 @@
     "prepare": "husky install",
     "docker:dev": "docker-compose up -d",
     "docker:dev:logs": "docker-compose logs -f workoutlogapi",
-    "docker:test": "docker-compose -f docker-compose.test.yml up --abort-on-container-exit"
+    "docker:test": "docker-compose -f docker-compose.test.yml up --abort-on-container-exit",
+    "knex:migrate:make": "knex migrate:make",
+    "knex:migrate:latest": "knex migrate:latest",
+    "knex:migrate:rollback": "knex migrate:rollback"
   },
   "lint-staged": {
     "*.ts": [
