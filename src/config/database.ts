@@ -15,7 +15,7 @@ class Database {
     try {
       const [[{ result }]] = await connection.raw('SELECT 1+1 AS result');
       assert.strictEqual(result, 2);
-    } catch (err) {
+    } catch {
       throw new Error('database connection problem...');
     }
   }

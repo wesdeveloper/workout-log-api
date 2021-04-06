@@ -1,10 +1,10 @@
-import express, { Application } from 'express';
+import express, { Application, Express } from 'express';
 import morgan from 'morgan';
 import healthcheckRoutes from './modules/healthcheck/healthcheck-routes';
 import { database, logger } from './config';
 
 class App {
-  private app = express();
+  private app: Express = express();
 
   private setupExpress(): void {
     this.app.use(morgan('dev'));
