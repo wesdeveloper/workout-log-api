@@ -1,5 +1,5 @@
 export default class HealthcheckController {
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async isHealthcheck(httpRequest: Request) {
     return {
       statusCode: 200,
