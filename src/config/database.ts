@@ -2,11 +2,16 @@ import knex, { Knex } from 'knex';
 import assert from 'assert';
 import knexfile from '../../knexfile';
 
+const environment = process.env.NODE_ENV || 'development';
+const clientConfig = (environment === 'development')
+  ? knexfile.development
+  : knexfile.test;
+
 class Database {
   private connection!: Knex<any, unknown[]>;
 
   private connect(): void {
-    this.connection = knex(knexfile.development);
+    this.connection = knex(clientConfig);
   }
 
   public async checkConnection(): Promise<void> {

@@ -10,17 +10,8 @@
     "skipLibCheck": true,
     "noImplicitThis": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "rootDirs": [
-      "./src",
-      "./test"
-    ]
+    "baseUrl": "."
   },
-  "include": [
-    "./bin/**/*.ts",
-    "./src/**/*.ts",
-    "./test/**/*.ts"
-  ],
   "exclude": [
     "node_modules",
     "dist"

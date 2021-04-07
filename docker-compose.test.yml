@@ -12,7 +12,7 @@ services:
       DB_PASS: workout123
       DB_NAME: workout_test
       WAIT_HOSTS: db-test:3306
-    command: sh -c "/wait && npm run test:functional"
+    command: sh -c "/wait && npm run knex:migrate:latest && npm run test:functional"
     depends_on:
       - db-test
   db-test:

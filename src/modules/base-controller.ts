@@ -6,7 +6,7 @@ export interface ControllerAction {
 }
 
 export default class BaseController {
-  public getInternalServerError(): HttpResponse {
+  public handleInternalServerError(): HttpResponse {
     return {
       status: 500,
       body: {

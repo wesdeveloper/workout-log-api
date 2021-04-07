@@ -3,7 +3,7 @@ import { HttpRequest, HttpResponse } from '../../adapters/express-router-adapter
 import BaseController from '../base-controller';
 
 export default class HealthcheckController extends BaseController {
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async isHealthcheck(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       await database.checkConnection();
@@ -13,7 +13,7 @@ export default class HealthcheckController extends BaseController {
         body: { message: 'Ok' },
       };
     } catch {
-      return this.getInternalServerError();
+      return this.handleInternalServerError();
     }
   }
 }

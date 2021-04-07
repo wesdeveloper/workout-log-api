@@ -2,6 +2,7 @@ import express, { Application, Express } from 'express';
 import morgan from 'morgan';
 import healthcheckRoutes from './modules/healthcheck/healthcheck-routes';
 import { database, logger } from './config';
+import userRoutes from './modules/user/user-routes';
 
 class App {
   private app: Express = express();
@@ -12,6 +13,7 @@ class App {
     this.app.use(express.urlencoded());
 
     healthcheckRoutes.loadRoutes(this.app);
+    userRoutes.loadRoutes(this.app);
   }
 
   async init(): Promise<Application> {
