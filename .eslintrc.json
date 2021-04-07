@@ -14,11 +14,13 @@
         "project": "./tsconfig.json"
     },
     "plugins": [
-        "@typescript-eslint"
+      "@typescript-eslint"
     ],
     "rules": {
       "import/extensions": "off",
       "import/no-unresolved": "off",
-      "class-methods-use-this": "off"
+      "class-methods-use-this": "off",
+      "max-len": "off",
+      "import/no-cycle": "off"
     }
 }

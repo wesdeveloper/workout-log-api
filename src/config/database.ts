@@ -1,4 +1,4 @@
-import knex from 'knex';
+import knex, { Knex } from 'knex';
 import assert from 'assert';
 import knexfile from '../../knexfile';
 
@@ -8,9 +8,9 @@ const clientConfig = (environment === 'development')
   : knexfile.test;
 
 class Database {
-  private connection: any;
+  private connection!: Knex<any, unknown[]>;
 
-  private connect() {
+  private connect(): void {
     this.connection = knex(clientConfig);
   }
 
@@ -20,12 +20,12 @@ class Database {
     try {
       const [[{ result }]] = await connection.raw('SELECT 1+1 AS result');
       assert.strictEqual(result, 2);
-    } catch (err) {
+    } catch {
       throw new Error('database connection problem...');
     }
   }
 
-  public getConnection() {
+  public getConnection(): Knex<any, unknown[]> {
     if (!this.connection) {
       this.connect();
     }
@@ -33,7 +33,7 @@ class Database {
     return this.connection;
   }
 
-  public async closeConnection() {
+  public async closeConnection(): Promise<void> {
     await this.connection.destroy();
   }
 }
