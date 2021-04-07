@@ -13,7 +13,7 @@ export default class HealthcheckController extends BaseController {
         body: { message: 'Ok' },
       };
     } catch {
-      return this.getInternalServerError();
+      return this.handleInternalServerError();
     }
   }
 }
