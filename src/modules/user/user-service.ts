@@ -1,11 +1,13 @@
-export default class UserService {
-  private userModel;
+import { User, UserModelContext } from './user-model';
 
-  constructor(userModel: any) {
+export default class UserService {
+  private userModel: UserModelContext;
+
+  constructor(userModel: UserModelContext) {
     this.userModel = userModel;
   }
 
-  async createUser(user: any) {
+  async createUser(user: User): Promise<User> {
     return this.userModel.create(user);
   }
 }

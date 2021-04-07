@@ -3,7 +3,7 @@ import assert from 'assert';
 import knexfile from '../../knexfile';
 
 const environment = process.env.NODE_ENV || 'development';
-const clientConfig = (environment === 'development')
+const clientConfig: Knex.Config<any> = (environment === 'development')
   ? knexfile.development
   : knexfile.test;
 

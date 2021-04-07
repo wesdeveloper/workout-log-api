@@ -16,11 +16,16 @@ export interface User {
   gender: Gender
 }
 
-class UserModel {
+export interface UserModelContext {
+  create(user: User): Promise<User>;
+  getUserById(userId: number): Promise<User>;
+}
+
+class UserModel implements UserModelContext {
   private dbConnection = DataBase.getConnection();
 
   async create(user: User): Promise<User> {
-    const [userId] = await this.dbConnection<User>('users')
+    const [userId]: number[] = await this.dbConnection<User>('users')
       .returning('id')
       .insert(user);
 
@@ -28,7 +33,7 @@ class UserModel {
   }
 
   async getUserById(userId: number): Promise<User> {
-    const [user] = await this.dbConnection<User>('users')
+    const [user]: User[] = await this.dbConnection<User>('users')
       .where('id', userId)
       .select('*');
 
