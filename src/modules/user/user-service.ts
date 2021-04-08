@@ -1,11 +1,9 @@
+import { User, UserModel } from './user-model';
+
 export default class UserService {
-  private userModel;
+  constructor(private userModel: UserModel) { }
 
-  constructor(userModel: any) {
-    this.userModel = userModel;
-  }
-
-  async createUser(user: any) {
+  async createUser(user: Omit<User, 'id' | 'created_at' | 'updated_at'>): Promise<User> {
     return this.userModel.create(user);
   }
 }

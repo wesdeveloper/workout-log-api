@@ -5,7 +5,7 @@ import BaseRoutes from '../base-routes';
 
 class UserRoutes extends BaseRoutes {
   loadRoutes(router: Router) {
-    const userController = new UserController();
+    const userController: UserController = new UserController();
     router.post('/user', ExpressRouterAdapter.adapt(userController.createUser));
   }
 }

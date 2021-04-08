@@ -1,15 +1,15 @@
 import UserService from './user-service';
-import UserModel from './user-model';
+import userModel, { User } from './user-model';
 import { logger } from '../../config';
 import { HttpRequest } from '../../adapters/express-router-adapter';
 import BaseController from '../base-controller';
 
 export default class UserController extends BaseController {
-  private userService = new UserService(UserModel);
+  private userService = new UserService(userModel);
 
   createUser = async (httpRequest: HttpRequest) => {
     try {
-      const userCreated = await this.userService.createUser(httpRequest.body);
+      const userCreated: User = await this.userService.createUser(httpRequest.body);
 
       return {
         status: 201,
