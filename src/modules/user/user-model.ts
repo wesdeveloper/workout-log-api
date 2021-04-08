@@ -14,14 +14,16 @@ export interface User {
   nickname: string
   wheight: number
   gender: Gender
+  created_at: number
+  updated_at: number
 }
 
-export interface UserModelContext {
-  create(user: User): Promise<User>;
+export interface UserModel {
+  create(user: Omit<User, 'id' | 'created_at' | 'updated_at'>): Promise<User>;
   getUserById(userId: number): Promise<User>;
 }
 
-class UserModel implements UserModelContext {
+export class UserModel implements UserModel {
   private dbConnection = DataBase.getConnection();
 
   async create(user: User): Promise<User> {
