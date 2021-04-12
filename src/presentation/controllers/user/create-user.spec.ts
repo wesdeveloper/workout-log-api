@@ -1,10 +1,17 @@
-import faker from 'faker';
+import { User } from '../../../domain/entities/user';
+import { CreateUser } from '../../../domain/entities/use_cases/user/create-user';
 import { HelperValidatorErrorItem } from '../../../utils/helper-validations';
 import { HttpRequest, HttpResponse } from '../../ports/http';
+import { createUserDataMockFixture } from '../../__tests__/user-fixtures';
 import { CreateUserController } from './create-user';
 
+class CreateUserSpy implements CreateUser {
+  create = async (data: any): Promise<User> => ({});
+}
+
 const makeSut = () => {
-  const createUserController = new CreateUserController();
+  const createUser = new CreateUserSpy();
+  const createUserController = new CreateUserController(createUser);
 
   return {
     createUserController,
@@ -12,22 +19,42 @@ const makeSut = () => {
 };
 
 describe('Create user controller', () => {
-  it('Should create an create user controller instance', () => {
+  it('Should create a user controller instance', () => {
     const { createUserController } = makeSut();
     expect(createUserController).not.toBeNull();
   });
 
-  describe('Create user controller - validations', () => {
-    const createUserDataMock = {
-      name: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      nickName: faker.internet.userName(),
-      email: faker.internet.email(),
-      age: faker.datatype.number(50),
-      weight: faker.datatype.float({ min: 40, max: 200 }),
-      height: faker.datatype.float({ min: 1, max: 2 }),
-      gender: faker.name.gender(),
+  it('Should create a user with success', async () => {
+    const userDataMock = createUserDataMockFixture();
+
+    const { createUserController } = makeSut();
+
+    const httpRequest: HttpRequest = {
+      body: userDataMock,
     };
+    const httpResponse: HttpResponse = await createUserController.handle(httpRequest);
+    expect(httpResponse.status).toBe(201);
+  });
+
+  it('Should create a user and receive internal server error', async () => {
+    const userDataMock = createUserDataMockFixture();
+
+    const mockCreateUserSpy = {
+      create: jest.fn().mockImplementation(() => {
+        throw Error('internal server error');
+      }),
+    };
+    const createUserController = new CreateUserController(mockCreateUserSpy);
+    const httpRequest: HttpRequest = {
+      body: userDataMock,
+    };
+    const httpResponse: HttpResponse = await createUserController.handle(httpRequest);
+
+    expect(httpResponse.status).toBe(500);
+  });
+
+  describe('Create user controller - validations', () => {
+    const createUserDataMock = createUserDataMockFixture();
 
     const userKeysValidation = ['name', 'lastName', 'email', 'gender', 'age'];
 
