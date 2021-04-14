@@ -12,6 +12,12 @@ export const createUserData = Joi.object({
   gender: Joi.string().valid('M', 'F').required(),
 });
 
-export class User {
+export interface User {
+  id: number
+  name: string
+  lastName: string
+}
+
+export class User implements User {
   static validateCreateUserData = (userData: object): HelperValidatiorResult => validateObject(userData, createUserData);
 }
