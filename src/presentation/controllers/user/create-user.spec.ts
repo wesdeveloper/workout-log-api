@@ -1,12 +1,12 @@
 import { User } from '../../../domain/entities/user';
-import { CreateUser } from '../../../domain/entities/use_cases/user/create-user';
+import { CreateUserUseCase } from '../../../domain/use_cases/create-user';
 import { HelperValidatorErrorItem } from '../../../utils/helper-validations';
-import { HttpRequest, HttpResponse } from '../../ports/http';
+import { HttpRequest, HttpResponse } from '../../interfaces/http';
 import { createUserDataMockFixture } from '../../__tests__/user-fixtures';
 import { CreateUserController } from './create-user';
 
-class CreateUserSpy implements CreateUser {
-  create = async (data: any): Promise<User> => ({});
+class CreateUserSpy implements CreateUserUseCase {
+  create = async (data: User): Promise<User> => (data);
 }
 
 const makeSut = () => {

@@ -1,14 +1,14 @@
 import { User } from '../../../domain/entities/user';
-import { CreateUser } from '../../../domain/entities/use_cases/user/create-user';
+import { CreateUserUseCase } from '../../../domain/use_cases/create-user';
 import { BaseController } from '../../interfaces/base-controller';
-import { HttpRequest } from '../../ports/http';
+import { HttpRequest, HttpResponse } from '../../interfaces/http';
 
 export class CreateUserController extends BaseController {
-  constructor(private createUser: CreateUser) {
+  constructor(private createUser: CreateUserUseCase) {
     super();
   }
 
-  handle = async (httpRequest: HttpRequest) => {
+  handle = async (httpRequest: HttpRequest): Promise<HttpResponse> => {
     try {
       const { body: userData } = httpRequest;
       const validationCreateUserDataResult = User.validateCreateUserData(userData);

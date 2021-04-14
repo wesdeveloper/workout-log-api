@@ -1,5 +1,5 @@
-import { HttpRequest, HttpResponse } from '../ports/http';
 import { ControllerAction } from './controller-action';
+import { HttpRequest, HttpResponse } from './http';
 
 export abstract class BaseController implements ControllerAction {
   abstract handle(httpRequest: HttpRequest): Promise<HttpResponse>;
