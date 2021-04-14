@@ -12,10 +12,21 @@ export const createUserData = Joi.object({
   gender: Joi.string().valid('M', 'F').required(),
 });
 
+export enum Gender {
+  M = 'M',
+  F = 'F',
+}
+
 export interface User {
   id: number
   name: string
   lastName: string
+  email: string
+  age: number
+  nickName: string
+  weight: number
+  height: number
+  gender: Gender
 }
 
 export class User implements User {

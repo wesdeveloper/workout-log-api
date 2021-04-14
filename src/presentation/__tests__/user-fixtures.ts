@@ -1,9 +1,5 @@
 import faker from 'faker';
-
-const gender = {
-  M: 'M',
-  F: 'F',
-};
+import { Gender } from '../../domain/entities/user';
 
 export const createUserDataMockFixture = () => {
   const createUserDataMock = {
@@ -14,7 +10,7 @@ export const createUserDataMockFixture = () => {
     age: faker.datatype.number(50),
     weight: faker.datatype.float({ min: 40, max: 200 }),
     height: faker.datatype.float({ min: 1, max: 2 }),
-    gender: faker.random.arrayElement(Object.values(gender)),
+    gender: Gender.F,
   };
 
   return createUserDataMock;
