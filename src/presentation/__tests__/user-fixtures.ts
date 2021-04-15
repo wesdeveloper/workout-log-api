@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { Gender } from '../../domain/entities/user';
+import { Gender } from '../../domain/user';
 
 export const createUserDataMockFixture = () => {
   const createUserDataMock = {

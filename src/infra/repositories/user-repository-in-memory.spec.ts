@@ -7,17 +7,19 @@ const makeSut = () => {
   return { userRepository };
 };
 
-describe('User Repository in memory', () => {
-  it('Should create an instance of UserRepositoryInMemory', () => {
-    const sut = makeSut();
-    expect(sut.userRepository).toBeInstanceOf(UserRepositoryInMemory);
-  });
+describe('User Repository in memory - Repositories', () => {
+  describe('Success cases', () => {
+    it('Should create an instance of UserRepositoryInMemory', () => {
+      const sut = makeSut();
+      expect(sut.userRepository).toBeInstanceOf(UserRepositoryInMemory);
+    });
 
-  it('Should create an user', async () => {
-    const sut = makeSut();
-    const userData = createUserDataMockFixture();
-    const user = await sut.userRepository.createUser(userData);
+    it('Should create an user', async () => {
+      const sut = makeSut();
+      const userData = createUserDataMockFixture();
+      const user = await sut.userRepository.createUser(userData);
 
-    expect(user).toEqual(expect.objectContaining({ ...userData, id: expect.any(Number) }));
+      expect(user).toEqual(expect.objectContaining({ ...userData, id: expect.any(Number) }));
+    });
   });
 });

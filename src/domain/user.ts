@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { HelperValidatiorResult, validateObject } from '../../utils/helper-validations';
+import { HelperValidatiorResult, validateObject } from '../utils/helper-validations';
 
 export const createUserData = Joi.object({
   name: Joi.string().min(3).max(20).required(),

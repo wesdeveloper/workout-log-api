@@ -1,5 +1,5 @@
-import { User } from '../../../domain/entities/user';
-import { CreateUserUseCase } from '../../../domain/use_cases/create-user';
+import { CreateUserUseCase } from '../../../application/interfaces/use_cases/create-user';
+import { User } from '../../../domain/user';
 import { BaseController } from '../../interfaces/base-controller';
 import { HttpRequest, HttpResponse } from '../../interfaces/http';
 

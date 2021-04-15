@@ -8,5 +8,6 @@ module.exports = {
   testMatch: ['<rootDir>/src/**/*.spec.ts'],
   testEnvironment: 'node',
   clearMocks: true,
+  verbose: true,
   preset: 'ts-jest',
 };
