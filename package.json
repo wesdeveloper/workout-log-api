@@ -7,6 +7,7 @@
     "test:unit": "jest",
     "test:unit:dev": "jest --watchAll",
     "lint": "eslint --ext .ts .",
+    "knex:migrate:latest:test": "npx rimraf test.db && cross-env NODE_ENV=test knex migrate:latest",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,7 +17,11 @@
     "@types/faker": "^5.5.1",
     "@types/jest": "^26.0.22",
     "@types/joi": "^17.2.3",
+    "@types/knex": "^0.16.1",
+    "@types/sqlite3": "^3.1.7",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-plugin-import": "^2.22.1",
@@ -27,6 +32,8 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "joi": "^17.4.0"
+    "joi": "^17.4.0",
+    "knex": "^0.95.4",
+    "sqlite3": "^5.0.2"
   }
 }
