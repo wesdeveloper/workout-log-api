@@ -1,8 +1,9 @@
 import { createUserDataMockFixture } from '../../presentation/__tests__/user-fixtures';
-import { UserRepositoryInMemory } from './user-repository-in-memory';
+import { sqliteDatabase } from '../config/db/relational-databases';
+import { UserRepositoryInMemory } from './user-repository-sqlite';
 
 const makeSut = () => {
-  const userRepository = new UserRepositoryInMemory();
+  const userRepository = new UserRepositoryInMemory(sqliteDatabase);
 
   return { userRepository };
 };
